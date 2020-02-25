@@ -3,7 +3,6 @@ import Home from "../pages/home";
 import Contacts from "../pages/contacts";
 import About from "../pages/about";
 import Faq from "../pages/faq";
-
 const pageNavigation = page => {
   switch (page) {
     case "Home":
@@ -15,7 +14,7 @@ const pageNavigation = page => {
     case "FAQ":
       return <Faq />;
     default:
-      return Home;
+      return <Home />;
   }
 };
 export default pageNavigation;

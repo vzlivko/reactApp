@@ -6,8 +6,8 @@ import "../Layout/style.css";
 
 const Layout = () => {
   const navList = ["Home", "Contacts", "About", "FAQ"];
-  const [page, setPage] = useState("home");
-  
+  const [page, setPage] = useState("Home");
+
   return (
     <>
       <div className="page">
@@ -17,7 +17,7 @@ const Layout = () => {
         <div className="navigationList">
           <Navigator navList={navList} setPage={setPage} />
         </div>
-        <div className="content">{pageNavigation(page)}</div>
+        {pageNavigation(page)}
       </div>
     </>
   );
