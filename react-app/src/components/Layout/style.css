@@ -1,0 +1,17 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 2fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.header {
+  grid-area: 1 / 1 / 2 / 4;
+}
+.navigationList {
+  grid-area: 2 / 1 / 5 / 2;
+}
+.content {
+  grid-area: 2 / 2 / 5 / 4;
+}

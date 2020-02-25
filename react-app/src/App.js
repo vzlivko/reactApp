@@ -1,14 +1,12 @@
 import React from "react";
-import Header from "./header";
+import Layout from "./components/Layout"
 import "./App.css";
-
 function App() {
   return (
-    <React.Fragment>
-      <Header />
-      <div>Not header</div>
-    </React.Fragment>
-  );
+    <>
+    <Layout/>
+    </>
+  )
 }
 
 export default App;
