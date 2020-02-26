@@ -1,8 +1,11 @@
 import React from "react";
-import Home from "../pages/home";
-import Contacts from "../pages/contacts";
-import About from "../pages/about";
-import Faq from "../pages/faq";
+import { 
+  Home,
+  Contacts,
+  About,
+  Faq
+} from "../pages";
+
 const pageNavigation = page => {
   switch (page) {
     case "Home":

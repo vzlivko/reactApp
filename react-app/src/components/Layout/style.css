@@ -13,3 +13,14 @@
 .content {
   grid-area: 2 / 2 / 5 / 4;
 }
+
+.page {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-template-rows: repeat(5, 1fr);
+}
+
+.header { grid-area: 1 / 1 / 2 / 6; }
+.navigationList { grid-area: 2 / 1 / 6 / 2; }
+.content { grid-area: 2 / 2 / 6 / 4; }
+.answer { grid-area: 2 / 4 / 6 / 6; }
