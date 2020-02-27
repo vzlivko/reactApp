@@ -1,7 +1,5 @@
 import React from "react";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core";
 import { green } from "@material-ui/core/colors";
 import { withStyles } from "@material-ui/core/styles";
 
