@@ -30,7 +30,6 @@ const SubmitFormSchema = yup.object().shape({
       .required("Required field")
       .matches(phoneRegExp, "Phone number is not valid") || null
 });
-
 const sendForm = values => {
   document.getElementById("answer").innerHTML = `
     <p>Family name: ${values.familyName}</p>
@@ -72,7 +71,7 @@ const Contacts = () => (
                 variant="outlined"
                 label="Family name"
                 name="familyName"
-                onChange={handleChange}
+                onChange={e => console.log("e", e.target.value)}
                 onBlur={handleBlur}
                 value={values.familyName}
               />

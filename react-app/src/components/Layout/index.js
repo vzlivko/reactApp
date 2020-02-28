@@ -6,7 +6,12 @@ import "../Layout/style.css";
 
 const Layout = () => {
   const navList = ["Home", "Contacts", "About", "FAQ"];
-  const [page, setPage] = useState("Home");
+
+  let url = window.location.pathname.substring(1);
+  if (!url) url = "Home/";
+  window.history.pushState("", "", `/${url}`);
+
+  const [page, setPage] = useState(url);
 
   return (
     <>
