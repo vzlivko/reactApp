@@ -5,15 +5,7 @@ const DateForm = ({ changeDate, startDate }) => {
   const handleOnChange = date => {
     changeDate(date);
   };
-  return (
-    <>
-      <DatePicker
-        key='2'
-        selected={startDate}
-        onChange={handleOnChange}
-      />
-    </>
-  );
+  return <DatePicker selected={startDate} onChange={handleOnChange} />;
 };
 
 export default DateForm;

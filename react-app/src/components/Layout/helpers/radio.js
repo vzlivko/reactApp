@@ -19,19 +19,16 @@ const RadioGender = () => {
       <RadioGroup>
         <FormControlLabel
           control={<Radio color="primary" />}
-          key="1"
           value="male"
           label="Male"
         />
         <FormControlLabel
           control={<Radio color="secondary" />}
-          key="3"
           value="female"
           label="Female"
         />
         <FormControlLabel
           control={<GreenRadio color="default" />}
-          key="5"
           value="other"
           label="Other"
         />

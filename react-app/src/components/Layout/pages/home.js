@@ -13,7 +13,6 @@ const Home = () => {
   const [checked, setChecked] = useState(false);
   const [sliderValue, setValue] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
-
   const currentDate = new Date().getDate();
   const privatePolicy = state => {
     if (!state) return "dont";

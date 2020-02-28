@@ -10,7 +10,6 @@ const TempSlider = ({ changeSlider }) => {
       <div>Temperature</div>
       <Slider
         defaultValue={0}
-        key='4'
         aria-label="Temperature"
         aria-labelledby="discrete-slider-small-steps"
         step={1}

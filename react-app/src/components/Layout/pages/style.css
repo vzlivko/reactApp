@@ -1,0 +1,12 @@
+[name="error"] {
+  color: red;
+  padding-left: 10px;
+}
+.MuiTextField-root {
+  width: 100%;
+  margin: 10px !important;
+  max-width: 400px;
+}
+.submitButton {
+  margin: 10px;
+}

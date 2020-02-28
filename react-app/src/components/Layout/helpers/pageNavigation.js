@@ -1,10 +1,5 @@
 import React from "react";
-import { 
-  Home,
-  Contacts,
-  About,
-  Faq
-} from "../pages";
+import { Home, Contacts, About, Faq } from "../pages";
 
 const pageNavigation = page => {
   switch (page) {

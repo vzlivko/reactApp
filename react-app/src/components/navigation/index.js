@@ -10,7 +10,7 @@ const Navigator = ({ navList, setPage }) => {
     <div className="container">
       {navList.map((item, index) => {
         return (
-          <button key={`${index * 2}`} onClick={() => handleOnclick(item)}>
+          <button key={index} onClick={() => handleOnclick(item)}>
             {item}
           </button>
         );
