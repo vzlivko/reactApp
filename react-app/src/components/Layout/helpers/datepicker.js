@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import DateFnsUtils from "@date-io/date-fns";
-import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
-import "/home/user/reactApp/react-app/node_modules/react-datepicker/dist/react-datepicker.css";
-const DatePick = () => {
-  const [selectedDate, handleDateChange] = useState(new Date());
-  console.log("new Date()", new Date());
+import React from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+const DateForm = ({ changeDate, startDate }) => {
+  const handleOnChange = date => {
+    changeDate(date);
+  };
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <DatePicker value={selectedDate} onChange={handleDateChange} />
-    </MuiPickersUtilsProvider>
+    <>
+      <DatePicker
+        key='2'
+        selected={startDate}
+        onChange={handleOnChange}
+      />
+    </>
   );
 };
 
-export default DatePick;
+export default DateForm;

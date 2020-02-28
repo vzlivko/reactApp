@@ -1,7 +1,5 @@
 import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-
+import { Checkbox, FormControlLabel } from "@material-ui/core";
 const PrivatePolicy = ({ setChecked }) => {
   const changeState = event => {
     setChecked(event.target.checked);
@@ -9,6 +7,7 @@ const PrivatePolicy = ({ setChecked }) => {
   return (
     <>
       <FormControlLabel
+        key='8'
         control={<Checkbox onChange={changeState} />}
         label="Private policy"
         labelPlacement="bottom"
