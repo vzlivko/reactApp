@@ -2,6 +2,8 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { TextField, Button } from "@material-ui/core";
 import * as yup from "yup";
+import "../pages/style.css";
+const phoneRegExp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,11}(\s*)?$/;
 const SubmitFormSchema = yup.object().shape({
   email: yup
     .string()
@@ -20,11 +22,25 @@ const SubmitFormSchema = yup.object().shape({
     .string()
     .max(40, "Too long")
     .required("Required field"),
-  mobile: yup
-    .number()
-    .max(90000000000, "Wrong number format")
-    .min(70000000000, "Wrong number format")
+  mobile:
+    yup
+      .string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required field")
+      .matches(phoneRegExp, "Phone number is not valid") || null
 });
+
+const sendForm = values => {
+  document.getElementById("answer").innerHTML = `
+    <p>Family name: ${values.familyName}</p>
+    <p>Name: ${values.name}</p>
+    <p>Fathers name: ${values.fatherName}</p>
+    <p>Email: ${values.email}</p>
+    <p>Phone number: ${values.mobile}</p>
+    <p>Password: ${values.password}</p>
+  `;
+};
 
 const Contacts = () => (
   <>
@@ -39,95 +55,102 @@ const Contacts = () => (
           password: ""
         }}
         validationSchema={SubmitFormSchema}
-        onSubmit={values => console.log("123")}
+        onSubmit={sendForm}
       >
         {({
           values,
           errors,
           touched,
-          handleChange,
           handleBlur,
+          handleChange,
           handleSubmit,
           isValid
         }) => (
           <>
-            <Form
-              onSubmit={handleSubmit}
-              isValid={
-                touched.familyName &&
-                touched.name &&
-                touched.email &&
-                touched.mobile &&
-                touched.password
-              }
-            >
-              <p>
-                <TextField
-                  variant="outlined"
-                  label="Фамилия"
-                  name="familyName"
-                  onChange={handleChange}
-                  value={values.familyName}
-                />
-                {errors.familyName}
-              </p>
-              <p>
-                <TextField
-                  variant="outlined"
-                  label="Имя"
-                  name="name"
-                  onChange={handleChange}
-                  value={values.name}
-                />
-                {errors.name}
-              </p>
+            <Form onSubmit={handleSubmit}>
               <TextField
                 variant="outlined"
-                label="Отчество"
+                label="Family name"
+                name="familyName"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.familyName}
+              />
+              {errors.familyName && touched.familyName ? (
+                <div name="error">{errors.familyName}</div>
+              ) : null}
+              <TextField
+                variant="outlined"
+                label="Name"
+                name="name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+              />
+              {errors.name && touched.name ? (
+                <div name="error">{errors.name}</div>
+              ) : null}
+
+              <TextField
+                variant="outlined"
+                label="Fathers name"
                 name="fatherName"
                 onChange={handleChange}
+                onBlur={handleBlur}
                 value={values.fatherName}
               />
-              <p>
-                <TextField
-                  variant="outlined"
-                  label="Email"
-                  name="email"
-                  onChange={handleChange}
-                  value={values.email}
-                  placeholder={errors.email}
-                />
-                {errors.email}
-              </p>
-              <p>
-                <TextField
-                  variant="outlined"
-                  label="Моб. телефон"
-                  name="mobile"
-                  onChange={handleChange}
-                  value={values.mobile}
-                />
-                {errors.mobile}
-              </p>
-              <p>
-                <TextField
-                  type="password"
-                  variant="outlined"
-                  label="Пароль"
-                  name="password"
-                  onChange={handleChange}
-                  value={values.password}
-                />
-                {errors.password}
-              </p>
-              <Button disabled={isValid} variant="contained" type="submit">
-                Submit
-              </Button>
+              <TextField
+                variant="outlined"
+                label="Email"
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                placeholder={errors.email}
+              />
+              {errors.email && touched.email ? (
+                <div name="error">{errors.email}</div>
+              ) : null}
+
+              <TextField
+                variant="outlined"
+                label="Phone number"
+                name="mobile"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.mobile}
+              />
+              {errors.mobile && touched.mobile ? (
+                <div name="error">{errors.mobile}</div>
+              ) : null}
+
+              <TextField
+                type="password"
+                variant="outlined"
+                label="Password"
+                name="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
+              {errors.password && touched.password ? (
+                <div name="error">{errors.password}</div>
+              ) : null}
+              <div className="submitButton">
+                <Button
+                  disabled={!isValid || !touched.familyName}
+                  variant="contained"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </div>
             </Form>
           </>
         )}
       </Formik>
     </div>
+    <div className="answer" id="answer"></div>
   </>
 );
 

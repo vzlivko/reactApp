@@ -5,14 +5,11 @@ const PrivatePolicy = ({ setChecked }) => {
     setChecked(event.target.checked);
   };
   return (
-    <>
-      <FormControlLabel
-        key='8'
-        control={<Checkbox onChange={changeState} />}
-        label="Private policy"
-        labelPlacement="bottom"
-      />
-    </>
+    <FormControlLabel
+      control={<Checkbox onChange={changeState} />}
+      label="Private policy"
+      labelPlacement="bottom"
+    />
   );
 };
 
