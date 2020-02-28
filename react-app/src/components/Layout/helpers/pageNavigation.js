@@ -3,13 +3,13 @@ import { Home, Contacts, About, Faq } from "../pages";
 
 const pageNavigation = page => {
   switch (page) {
-    case "Home":
+    case "Home/":
       return <Home />;
-    case "Contacts":
+    case "Contacts/":
       return <Contacts />;
-    case "About":
+    case "About/":
       return <About />;
-    case "FAQ":
+    case "FAQ/":
       return <Faq />;
     default:
       return <Home />;
