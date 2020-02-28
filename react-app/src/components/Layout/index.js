@@ -6,7 +6,24 @@ import "../Layout/style.css";
 
 const Layout = () => {
   const navList = ["Home", "Contacts", "About", "FAQ"];
-  const [page, setPage] = useState("Home");
+  let path;
+  switch (window.location.pathname) {
+    case "/":
+      path = "Home";
+      break;
+    case "/Contacts":
+      path = "Contacts";
+      break;
+    case "/About":
+      path = "About";
+      break;
+    case "/FAQ":
+      path = "FAQ";
+      break;
+    default:
+      path = "Home";
+  }
+  const [page, setPage] = useState(path);
 
   return (
     <>

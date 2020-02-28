@@ -14,10 +14,8 @@ const Buttons = ({ buttonList, buttonTitle }) => {
         onClick={() => handleOnClick(item)}
       >
         {item} button
-      </Button>
-      {' '}
+      </Button>{" "}
     </span>
-    )
-  );
+  ));
 };
 export default Buttons;
