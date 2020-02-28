@@ -3,7 +3,7 @@ import "../navigation/style.css";
 
 const Navigator = ({ navList, setPage }) => {
   const handleOnclick = item => {
-    window.history.pushState("", "", `/${item}/`);
+    window.history.pushState(null, null, `/${item}/`);
     setPage(`${item}/`);
   };
 

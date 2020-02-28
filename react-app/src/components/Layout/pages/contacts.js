@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { Formik, Form } from "formik";
 import { TextField, Button } from "@material-ui/core";
 import * as yup from "yup";
@@ -30,16 +31,23 @@ const SubmitFormSchema = yup.object().shape({
       .required("Required field")
       .matches(phoneRegExp, "Phone number is not valid") || null
 });
-const sendForm = values => {
-  document.getElementById("answer").innerHTML = `
-    <p>Family name: ${values.familyName}</p>
-    <p>Name: ${values.name}</p>
-    <p>Fathers name: ${values.fatherName}</p>
-    <p>Email: ${values.email}</p>
-    <p>Phone number: ${values.mobile}</p>
-    <p>Password: ${values.password}</p>
-  `;
-};
+
+const ContactInfo = ({ values }) => (
+  <>
+    <p>Family name: {values.familyName}</p>
+    <p>Name: {values.name}</p>
+    <p>Fathers name: {values.fatherName}</p>
+    <p>Email: {values.email}</p>
+    <p>Phone number: {values.mobile}</p>
+    <p>Password: {values.password}</p>
+  </>
+);
+
+const sendForm = values =>
+  ReactDOM.render(
+    <ContactInfo values={values} />,
+    document.getElementById("answer")
+  );
 
 const Contacts = () => (
   <>
@@ -71,7 +79,8 @@ const Contacts = () => (
                 variant="outlined"
                 label="Family name"
                 name="familyName"
-                onChange={e => console.log("e", e.target.value)}
+                onChange={handleChange}
+                // onChange={e => console.log("e", e.target.value)}
                 onBlur={handleBlur}
                 value={values.familyName}
               />

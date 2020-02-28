@@ -9,7 +9,7 @@ const Layout = () => {
 
   let url = window.location.pathname.substring(1);
   if (!url) url = "Home/";
-  window.history.pushState("", "", `/${url}`);
+  window.history.pushState(null, null, `/${url}`);
 
   const [page, setPage] = useState(url);
 
