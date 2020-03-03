@@ -149,15 +149,21 @@ const Contacts = () => {
         </Formik>
       </div>
       <div className="answer" id="answer">
-        <p>Family name: {contacts.familyName}</p>
-        <p>Name: {contacts.name}</p>
-        <p>Fathers name: {contacts.fatherName}</p>
-        <p>Email: {contacts.email}</p>
-        <p>Phone number: {contacts.mobile}</p>
-        <p>Password: {contacts.password}</p>
+        <ContactForm contacts={contacts} />
       </div>
     </>
   );
 };
+
+const ContactForm = ({ contacts }) => (
+  <>
+    <p>Family name: {contacts.familyName}</p>
+    <p>Name: {contacts.name}</p>
+    <p>Fathers name: {contacts.fatherName}</p>
+    <p>Email: {contacts.email}</p>
+    <p>Phone number: {contacts.mobile}</p>
+    <p>Password: {contacts.password}</p>
+  </>
+);
 
 export default Contacts;
