@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 const Buttons = ({ buttonList, buttonTitle }) => {
   const handleOnClick = item => {
     buttonTitle(item);
+    localStorage.setItem("answer", item);
   };
   return buttonList.map((item, index) => (
     <span key={`${index + 2}`}>

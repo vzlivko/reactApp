@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const DateForm = ({ changeDate, startDate }) => {
   const handleOnChange = date => {
     changeDate(date);
+    localStorage.setItem("date", date);
   };
   return <DatePicker selected={startDate} onChange={handleOnChange} />;
 };

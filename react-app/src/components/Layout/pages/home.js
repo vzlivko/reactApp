@@ -9,12 +9,19 @@ import {
 
 const Home = () => {
   const buttonList = ["default", "primary", "secondary"];
-  const [answer, viewAnswer] = useState("default");
-  const [checked, setChecked] = useState(false);
-  const [sliderValue, setValue] = useState(0);
-  const [startDate, setStartDate] = useState(new Date());
 
+  const [answer, viewAnswer] = useState(
+    localStorage.getItem("answer") || "default"
+  );
+  const [checked, setChecked] = useState(
+    localStorage.getItem("checkbox") || false
+  );
+  const [sliderValue, setValue] = useState(localStorage.getItem("slider") || 0);
+  const [startDate, setStartDate] = useState(
+    new Date(localStorage.getItem("date") || new Date())
+  );
   const currentDate = new Date().getDate();
+
   const privatePolicy = state => {
     if (!state) return "dont";
   };
@@ -23,7 +30,7 @@ const Home = () => {
       <div className="content">
         <p>Home page</p>
         <Buttons buttonList={buttonList} buttonTitle={viewAnswer} />
-        <PrivatePolicy setChecked={setChecked} />
+        <PrivatePolicy setChecked={setChecked} checked={checked} />
         <RadioGender />
         <TempSlider changeSlider={setValue} />
         <DateForm changeDate={setStartDate} startDate={startDate} />
@@ -37,4 +44,5 @@ const Home = () => {
     </>
   );
 };
+
 export default Home;
