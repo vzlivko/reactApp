@@ -13,22 +13,25 @@ const GreenRadio = withStyles({
 })(props => <Radio color="default" {...props} />);
 
 const RadioGender = () => {
+  const changeRadio = event => {
+    localStorage.setItem("radio", event.target.value);
+  };
   return (
     <div>
       &nbsp;
-      <RadioGroup>
+      <RadioGroup defaultValue={localStorage.getItem("radio")}>
         <FormControlLabel
-          control={<Radio color="primary" />}
+          control={<Radio color="primary" onChange={changeRadio} />}
           value="male"
           label="Male"
         />
         <FormControlLabel
-          control={<Radio color="secondary" />}
+          control={<Radio color="secondary" onChange={changeRadio} />}
           value="female"
           label="Female"
         />
         <FormControlLabel
-          control={<GreenRadio color="default" />}
+          control={<GreenRadio color="default" onChange={changeRadio} />}
           value="other"
           label="Other"
         />

@@ -4,12 +4,13 @@ import Slider from "@material-ui/core/Slider";
 const TempSlider = ({ changeSlider }) => {
   const handleOnChange = (event, value) => {
     changeSlider(value);
+    localStorage.setItem("slider", value);
   };
   return (
     <>
       <div>Temperature</div>
       <Slider
-        defaultValue={0}
+        value={Number(localStorage.getItem("slider"))}
         aria-label="Temperature"
         aria-labelledby="discrete-slider-small-steps"
         step={1}
