@@ -10,6 +10,8 @@ import Editor from "draft-js-plugins-editor";
 import { mediaBlockRenderer } from "../pages/mediaBlockRenderer";
 import "../../../App.css";
 
+const axios = require("axios");
+
 class About extends React.Component {
   constructor(props) {
     super(props);
@@ -25,13 +27,14 @@ class About extends React.Component {
     }
 
     this.state = {
-      editorState: initialEditorState
+      editorState: initialEditorState,
+      readOnlyEditorState: EditorState.createEmpty()
     };
   }
 
   onChange = editorState => {
     this.setState({
-      editorState
+      editorState: editorState
     });
   };
 
@@ -95,10 +98,28 @@ class About extends React.Component {
   };
 
   saveData = () => {
-    var contentRaw = convertToRaw(this.state.editorState.getCurrentContent());
+    const contentRaw = convertToRaw(this.state.editorState.getCurrentContent());
     localStorage.setItem("draftRaw", JSON.stringify(contentRaw));
+    axios
+      .post("https://my-json-server.typicode.com/vzlivko/testAPI/posts", {
+        title: contentRaw
+      })
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
   };
-  //editorContainer
+
+  getData = () => {
+    axios
+      .get("https://my-json-server.typicode.com/vzlivko/testAPI/posts/2")
+      .then(res =>
+        this.setState({
+          readOnlyEditorState: EditorState.createWithContent(
+            convertFromRaw(res.data.title)
+          )
+        })
+      );
+  };
+
   render() {
     return (
       <div className="content">
@@ -114,6 +135,7 @@ class About extends React.Component {
           </button>
           <button onClick={this.onAddImage}>Load image</button>
           <button onClick={this.saveData}>Save data</button>
+          <button onClick={this.getData}>Get data</button>
         </div>
         <div className="editors">
           <Editor
@@ -121,6 +143,16 @@ class About extends React.Component {
             editorState={this.state.editorState}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
+            plugins={this.plugins}
+            ref="editor"
+          />
+        </div>
+        <div>Your post:</div>
+        <div className="editors">
+          <Editor
+            readOnly
+            blockRendererFn={mediaBlockRenderer}
+            editorState={this.state.readOnlyEditorState}
             plugins={this.plugins}
             ref="editor"
           />
