@@ -14,7 +14,7 @@ const Home = () => {
     localStorage.getItem("answer") || "default"
   );
   const [checked, setChecked] = useState(
-    localStorage.getItem("checkbox") || false
+    JSON.parse(localStorage.getItem("checkbox")) || false
   );
   const [sliderValue, setValue] = useState(localStorage.getItem("slider") || 0);
   const [startDate, setStartDate] = useState(

@@ -1,12 +1,3 @@
-/*
-import React from "react";
-import { EditorState, RichUtils, AtomicBlockUtils } from "draft-js";
-const About = () => {
-  return <div className="content">About us</div>;
-};
-export default About;
-*/
-
 import React from "react";
 import {
   EditorState,
@@ -64,30 +55,27 @@ class About extends React.Component {
     e.preventDefault();
     const editorState = this.state.editorState;
     const urlValue = window.prompt("Paste Image Link");
-    const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      "image",
-      "IMMUTABLE",
-      { src: urlValue }
-    );
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    const newEditorState = EditorState.set(
-      editorState,
-      { currentContent: contentStateWithEntity },
-      "create-entity"
-    );
-    this.setState(
-      {
+    if (urlValue) {
+      const contentState = editorState.getCurrentContent();
+      const contentStateWithEntity = contentState.createEntity(
+        "image",
+        "IMMUTABLE",
+        { src: urlValue }
+      );
+      const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+      const newEditorState = EditorState.set(
+        editorState,
+        { currentContent: contentStateWithEntity },
+        "create-entity"
+      );
+      this.setState({
         editorState: AtomicBlockUtils.insertAtomicBlock(
           newEditorState,
           entityKey,
           " "
         )
-      },
-      () => {
-        setTimeout(() => this.focus(), 0);
-      }
-    );
+      });
+    }
   };
 
   onUnderlineClick = () => {
@@ -110,31 +98,21 @@ class About extends React.Component {
     var contentRaw = convertToRaw(this.state.editorState.getCurrentContent());
     localStorage.setItem("draftRaw", JSON.stringify(contentRaw));
   };
-
+  //editorContainer
   render() {
     return (
-      <div className="editorContainer">
+      <div className="content">
         <div className="menuButtons">
           <button onClick={this.onUnderlineClick}>
             <u>Underline</u>
-          </button>{" "}
+          </button>
           <button onClick={this.onBoldClick}>
             <b>Bold</b>
-          </button>{" "}
+          </button>
           <button onClick={this.onItalicClick}>
             <em>Italic</em>
-          </button>{" "}
-          <button className="inline styleButton" onClick={this.onAddImage}>
-            <i
-              className="material-icons"
-              style={{
-                fontSize: "16px",
-                textAlign: "center"
-              }}
-            >
-              Load image
-            </i>
-          </button>{" "}
+          </button>
+          <button onClick={this.onAddImage}>Load image</button>
           <button onClick={this.saveData}>Save data</button>
         </div>
         <div className="editors">

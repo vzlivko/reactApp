@@ -11,6 +11,8 @@
     "@testing-library/user-event": "^7.2.1",
     "babel": "^6.23.0",
     "date-fns": "^2.10.0",
+    "draft-js": "^0.11.4",
+    "draft-js-plugins-editor": "^3.0.0",
     "formik": "^2.1.4",
     "material-ui": "^1.0.0-beta.47",
     "prop-types": "^15.7.2",
