@@ -35,6 +35,16 @@ const Contacts = () => {
   const [contacts, setContacts] = useState(
     JSON.parse(localStorage.getItem("contacts"))
   );
+  if (!contacts) {
+    setContacts({
+      familyName: "",
+      name: "",
+      fatherName: "",
+      email: "",
+      mobile: "",
+      password: ""
+    });
+  }
 
   const sendForm = values => {
     localStorage.setItem("contacts", JSON.stringify(values));
@@ -44,14 +54,7 @@ const Contacts = () => {
     <>
       <div className="content">
         <Formik
-          initialValues={{
-            familyName: contacts.familyName || "",
-            name: contacts.name || "",
-            fatherName: contacts.fatherName || "",
-            email: contacts.email || "",
-            mobile: contacts.mobile || "",
-            password: contacts.password || ""
-          }}
+          initialValues={contacts}
           validationSchema={SubmitFormSchema}
           onSubmit={sendForm}
         >

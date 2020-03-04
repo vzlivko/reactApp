@@ -7,9 +7,7 @@ const PrivatePolicy = ({ setChecked, checked }) => {
   };
   return (
     <FormControlLabel
-      control={
-        <Checkbox onChange={changeState} checked={JSON.parse(checked)} />
-      }
+      control={<Checkbox onChange={changeState} checked={checked} />}
       label="Private policy"
       labelPlacement="bottom"
     />
