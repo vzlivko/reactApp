@@ -1,16 +1,16 @@
 import React from "react";
 import Slider from "@material-ui/core/Slider";
 
-const TempSlider = ({ changeSlider }) => {
+const TempSlider = ({ changeSlider, state }) => {
   const handleOnChange = (event, value) => {
-    changeSlider(value);
+    changeSlider({ ...state, sliderValue: value });
     localStorage.setItem("slider", value);
   };
   return (
     <>
       <div>Temperature</div>
       <Slider
-        value={Number(localStorage.getItem("slider"))}
+        value={Number(state.sliderValue)}
         aria-label="Temperature"
         aria-labelledby="discrete-slider-small-steps"
         step={1}

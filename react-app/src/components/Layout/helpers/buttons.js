@@ -1,9 +1,9 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 
-const Buttons = ({ buttonList, buttonTitle }) => {
+const Buttons = ({ buttonList, buttonTitle, state }) => {
   const handleOnClick = item => {
-    buttonTitle(item);
+    buttonTitle({...state, answer: item});
     localStorage.setItem("answer", item);
   };
   return buttonList.map((item, index) => (

@@ -1,7 +1,7 @@
-import Buttons from "../helpers/buttons";
-import RadioGender from "../helpers/radio";
-import TempSlider from "../helpers/slider";
-import DateForm from "../helpers/datepicker";
-import PrivatePolicy from "../helpers/checkbox";
+import Buttons from "./buttons";
+import RadioGender from "./radio";
+import TempSlider from "./slider";
+import DateForm from "./datepicker";
+import PrivatePolicy from "./checkbox";
 
 export { Buttons, RadioGender, TempSlider, DateForm, PrivatePolicy };

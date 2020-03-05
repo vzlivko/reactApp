@@ -4,7 +4,7 @@ import "./style.css";
 const Header = () => {
   return (
     <header>
-      <h2>Welcome to MusicBox</h2>
+      <h2>Welcome to Exceed Team</h2>
     </header>
   );
 };

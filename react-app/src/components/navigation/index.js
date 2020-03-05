@@ -1,5 +1,6 @@
 import React from "react";
-import "../navigation/style.css";
+import "./style.css";
+import Button from "@material-ui/core/Button";
 
 const Navigator = ({ navList, setPage }) => {
   const handleOnclick = item => {
@@ -11,9 +12,14 @@ const Navigator = ({ navList, setPage }) => {
     <div className="container">
       {navList.map((item, index) => {
         return (
-          <button key={index} onClick={() => handleOnclick(item)}>
+          <Button
+            key={index}
+            variant="contained"
+            color="primary"
+            onClick={() => handleOnclick(item)}
+          >
             {item}
-          </button>
+          </Button>
         );
       })}
     </div>

@@ -12,19 +12,4 @@
   color: white;
 }
 
-.editors {
-  background-color: #fffef7;
-  width: 80%;
-  min-width: 500px;
-  margin: auto;
-  box-shadow: 0px 0px 6px 1px rgba(10, 8, 8, 0.5);
-  height: 300px;
-  overflow-y: scroll;
-  padding: 20px;
-  font-size: 18px;
-  font-family: "calibri", sans-serif;
-}
 
-.menuButtons {
-  padding-left: 100px;
-}

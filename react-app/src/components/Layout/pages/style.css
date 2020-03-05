@@ -10,3 +10,39 @@
 .submitButton {
   margin: 10px;
 }
+
+.draftEditor {
+  background-color: #fffef7;
+  width: auto;
+  min-width: 400px;
+  margin: auto;
+  box-shadow: 0px 0px 6px 1px rgba(10, 8, 8, 0.5);
+  height: 300px;
+  overflow-y: scroll;
+  padding: 20px;
+  font-size: 18px;
+  font-family: "calibri", sans-serif;
+}
+
+.postedDraft {
+  background-color: #cccccc;
+  width: auto;
+  box-shadow: 0px 0px 6px 1px rgba(10, 8, 8, 0.5);
+  height: auto;
+  padding: 10px;
+  font-size: 18px;
+  font-family: "arial", sans-serif;
+}
+
+.styleButtons {
+  padding-left: 100px;
+  padding-bottom: 20px;
+}
+
+.controlButtons {
+  padding-bottom: 20px;
+}
+
+#title {
+  margin: 20px;
+}
