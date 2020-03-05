@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   EditorState,
   RichUtils,
@@ -7,53 +7,37 @@ import {
   convertToRaw
 } from "draft-js";
 import Editor from "draft-js-plugins-editor";
-import { mediaBlockRenderer } from "../pages/mediaBlockRenderer";
-import "../../../App.css";
+import { mediaBlockRenderer } from "./mediaBlockRenderer";
+import "./style.css";
+import { Button } from "@material-ui/core";
 
-class About extends React.Component {
-  constructor(props) {
-    super(props);
+const axios = require("axios");
 
-    let initialEditorState = null;
-    const storeRaw = localStorage.getItem("draftRaw");
+const About = () => {
+  let initialEditorState = null;
+  const storeRaw = localStorage.getItem("draftRaw");
 
-    if (storeRaw) {
-      const rawContentFromStore = convertFromRaw(JSON.parse(storeRaw));
-      initialEditorState = EditorState.createWithContent(rawContentFromStore);
-    } else {
-      initialEditorState = EditorState.createEmpty();
-    }
-
-    this.state = {
-      editorState: initialEditorState
-    };
+  const [draftState, setDraftState] = useState(EditorState.createEmpty());
+  if (storeRaw) {
+    const rawContentFromStore = convertFromRaw(JSON.parse(storeRaw));
+    initialEditorState = EditorState.createWithContent(rawContentFromStore);
+  } else {
+    initialEditorState = EditorState.createEmpty();
   }
+  const [editorState, setEditorState] = useState(initialEditorState);
+  const [hidden, setHidden] = useState(true);
 
-  onChange = editorState => {
-    this.setState({
-      editorState
-    });
-  };
-
-  handleKeyCommand = command => {
-    const newState = RichUtils.handleKeyCommand(
-      this.state.editorState,
-      command
-    );
+  const handleKeyCommand = command => {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
-      this.onChange(newState);
+      setEditorState(newState);
       return "handled";
     }
     return "not-handled";
   };
 
-  onURLChange = e => this.setState({ urlValue: e.target.value });
-
-  focus = () => this.refs.editor.focus();
-
-  onAddImage = e => {
+  const onAddImage = e => {
     e.preventDefault();
-    const editorState = this.state.editorState;
     const urlValue = window.prompt("Paste Image Link");
     if (urlValue) {
       const contentState = editorState.getCurrentContent();
@@ -68,66 +52,93 @@ class About extends React.Component {
         { currentContent: contentStateWithEntity },
         "create-entity"
       );
-      this.setState({
-        editorState: AtomicBlockUtils.insertAtomicBlock(
-          newEditorState,
-          entityKey,
-          " "
-        )
-      });
+      setEditorState(
+        AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, " ")
+      );
     }
   };
 
-  onUnderlineClick = () => {
-    this.onChange(
-      RichUtils.toggleInlineStyle(this.state.editorState, "UNDERLINE")
-    );
+  const setTextStyle = style => {
+    setEditorState(RichUtils.toggleInlineStyle(editorState, style));
   };
 
-  onBoldClick = () => {
-    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "BOLD"));
-  };
-
-  onItalicClick = () => {
-    this.onChange(
-      RichUtils.toggleInlineStyle(this.state.editorState, "ITALIC")
-    );
-  };
-
-  saveData = () => {
-    var contentRaw = convertToRaw(this.state.editorState.getCurrentContent());
+  const saveData = () => {
+    const contentRaw = convertToRaw(editorState.getCurrentContent());
     localStorage.setItem("draftRaw", JSON.stringify(contentRaw));
+    axios
+      .post("https://my-json-server.typicode.com/vzlivko/testAPI/posts", {
+        title: contentRaw
+      })
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
   };
-  //editorContainer
-  render() {
-    return (
-      <div className="content">
-        <div className="menuButtons">
-          <button onClick={this.onUnderlineClick}>
-            <u>Underline</u>
-          </button>
-          <button onClick={this.onBoldClick}>
-            <b>Bold</b>
-          </button>
-          <button onClick={this.onItalicClick}>
-            <em>Italic</em>
-          </button>
-          <button onClick={this.onAddImage}>Load image</button>
-          <button onClick={this.saveData}>Save data</button>
-        </div>
-        <div className="editors">
-          <Editor
-            blockRendererFn={mediaBlockRenderer}
-            editorState={this.state.editorState}
-            handleKeyCommand={this.handleKeyCommand}
-            onChange={this.onChange}
-            plugins={this.plugins}
-            ref="editor"
-          />
-        </div>
+
+  const getData = () => {
+    axios
+      .get("https://my-json-server.typicode.com/vzlivko/testAPI/posts/2")
+      .then(res => {
+        setDraftState(
+          EditorState.createWithContent(convertFromRaw(res.data.title))
+        );
+        setHidden(false);
+      });
+  };
+
+  return (
+    <div className="content">
+      <div className="styleButtons">
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setTextStyle("UNDERLINE")}
+        >
+          <u>Underline</u>
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setTextStyle("BOLD")}
+        >
+          <b>Bold</b>
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setTextStyle("ITALIC")}
+        >
+          <em>Italic</em>
+        </Button>
       </div>
-    );
-  }
-}
+      <div className="controlButtons">
+        <Button variant="contained" color="primary" onClick={onAddImage}>
+          Load image
+        </Button>
+        <Button variant="contained" onClick={saveData}>
+          Send data on server
+        </Button>
+        <Button variant="outlined" color="primary" onClick={getData}>
+          Post message
+        </Button>
+      </div>
+      <div className="draftEditor">
+        <Editor
+          blockRendererFn={mediaBlockRenderer}
+          editorState={editorState}
+          handleKeyCommand={handleKeyCommand}
+          onChange={setEditorState}
+          margin="20px"
+        />
+      </div>
+      <div id="title">Your post:</div>
+      <div className="postedDraft" hidden={hidden}>
+        <Editor
+          readOnly
+          blockRendererFn={mediaBlockRenderer}
+          editorState={draftState}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default About;

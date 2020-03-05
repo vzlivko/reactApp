@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { TextField, Button } from "@material-ui/core";
 import * as yup from "yup";
-import "../pages/style.css";
+import "./style.css";
 const phoneRegExp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,11}(\s*)?$/;
 const SubmitFormSchema = yup.object().shape({
   email: yup
@@ -50,6 +50,7 @@ const Contacts = () => {
     localStorage.setItem("contacts", JSON.stringify(values));
     setContacts(values);
   };
+
   return (
     <>
       <div className="content">

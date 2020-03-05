@@ -1,6 +1,6 @@
-import Home from "../pages/home";
-import Contacts from "../pages/contacts";
-import About from "../pages/about";
-import Faq from "../pages/faq";
+import Home from "./home";
+import Contacts from "./contacts";
+import About from "./about";
+import Faq from "./faq";
 
-export {Home, Contacts,About,Faq};
+export { Home, Contacts, About, Faq };

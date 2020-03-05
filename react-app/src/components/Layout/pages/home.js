@@ -10,16 +10,13 @@ import {
 const Home = () => {
   const buttonList = ["default", "primary", "secondary"];
 
-  const [answer, viewAnswer] = useState(
-    localStorage.getItem("answer") || "default"
-  );
-  const [checked, setChecked] = useState(
-    JSON.parse(localStorage.getItem("checkbox")) || false
-  );
-  const [sliderValue, setValue] = useState(localStorage.getItem("slider") || 0);
-  const [startDate, setStartDate] = useState(
-    new Date(localStorage.getItem("date") || new Date())
-  );
+  const [state, setState] = useState({
+    answer: localStorage.getItem("answer") || "default",
+    checked: JSON.parse(localStorage.getItem("checkbox")) || false,
+    sliderValue: Number(localStorage.getItem("slider")) || 0,
+    startDate: new Date(localStorage.getItem("date")) || new Date()
+  });
+
   const currentDate = new Date().getDate();
 
   const privatePolicy = state => {
@@ -29,17 +26,19 @@ const Home = () => {
     <>
       <div className="content">
         <p>Home page</p>
-        <Buttons buttonList={buttonList} buttonTitle={viewAnswer} />
-        <PrivatePolicy setChecked={setChecked} checked={checked} />
+        <Buttons buttonList={buttonList} buttonTitle={setState} state={state} />
+        <PrivatePolicy setChecked={setState} state={state} />
         <RadioGender />
-        <TempSlider changeSlider={setValue} />
-        <DateForm changeDate={setStartDate} startDate={startDate} />
+        <TempSlider changeSlider={setState} state={state} />
+        <DateForm changeDate={setState} state={state} />
       </div>
       <div className="answer">
-        <p>{answer} button was pressed</p>
-        <p>You {privatePolicy(checked)} accept private policy</p>
-        <p>I am hot on {sliderValue}*C</p>
-        <p>User was {String(currentDate - startDate.getDate())} days ago</p>
+        <p>{state.answer} button was pressed</p>
+        <p>You {privatePolicy(state.checked)} accept private policy</p>
+        <p>I am hot on {state.sliderValue}*C</p>
+        <p>
+          User was {String(currentDate - state.startDate.getDate())} days ago
+        </p>
       </div>
     </>
   );

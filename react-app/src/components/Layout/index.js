@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../Header";
 import Navigator from "../navigation";
 import pageNavigation from "./helpers/pageNavigation";
-import "../Layout/style.css";
+import "./style.css";
 
 const Layout = () => {
   const navList = ["Home", "Contacts", "About", "FAQ"];
