@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   EditorState,
   RichUtils,
@@ -17,15 +17,19 @@ const About = () => {
   let initialEditorState = null;
   const storeRaw = localStorage.getItem("draftRaw");
 
-  const [draftState, setDraftState] = useState(EditorState.createEmpty());
   if (storeRaw) {
     const rawContentFromStore = convertFromRaw(JSON.parse(storeRaw));
     initialEditorState = EditorState.createWithContent(rawContentFromStore);
   } else {
     initialEditorState = EditorState.createEmpty();
   }
+
+  const editorRef = useRef(null);
   const [editorState, setEditorState] = useState(initialEditorState);
+  const [draftState, setDraftState] = useState(EditorState.createEmpty());
   const [hidden, setHidden] = useState(true);
+
+  useEffect(() => editorRef.current.focus());
 
   const handleKeyCommand = command => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -122,6 +126,7 @@ const About = () => {
       </div>
       <div className="draftEditor">
         <Editor
+          ref={editorRef}
           blockRendererFn={mediaBlockRenderer}
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}

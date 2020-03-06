@@ -2,10 +2,9 @@ import React from "react";
 import Slider from "@material-ui/core/Slider";
 
 const TempSlider = ({ changeSlider, state }) => {
-  const handleOnChange = (event, value) => {
+  const handleOnChange = (event, value) =>
     changeSlider({ ...state, sliderValue: value });
-    localStorage.setItem("slider", value);
-  };
+
   return (
     <>
       <div>Temperature</div>

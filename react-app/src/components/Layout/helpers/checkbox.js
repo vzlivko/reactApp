@@ -1,15 +1,11 @@
 import React from "react";
 import { Checkbox, FormControlLabel } from "@material-ui/core";
 const PrivatePolicy = ({ setChecked, state }) => {
-  const changeState = event => {
+  const changeState = event =>
     setChecked({ ...state, checked: event.target.checked });
-    localStorage.setItem("checkbox", event.target.checked);
-  };
   return (
     <FormControlLabel
-      control={
-        <Checkbox onChange={changeState} checked={state.checked} />
-      }
+      control={<Checkbox onChange={changeState} checked={state.checked} />}
       label="Private policy"
       labelPlacement="bottom"
     />

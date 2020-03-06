@@ -2,10 +2,8 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 
 const Buttons = ({ buttonList, buttonTitle, state }) => {
-  const handleOnClick = item => {
-    buttonTitle({...state, answer: item});
-    localStorage.setItem("answer", item);
-  };
+  const handleOnClick = item => buttonTitle({ ...state, answer: item });
+
   return buttonList.map((item, index) => (
     <span key={`${index + 2}`}>
       <Button
